@@ -1,0 +1,49 @@
+/* 自定義動畫效果 */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.battle-area {
+    animation: fadeIn 0.5s ease-in;
+}
+
+/* 自定義按鈕效果 */
+button {
+    transition: transform 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+/* 血條效果 */
+.hp-bar {
+    height: 20px;
+    background: #2d3748;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.hp-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #48bb78, #38a169);
+    transition: width 0.3s ease;
+}
+
+/* 遊戲訊息效果 */
+.message-fade {
+    animation: fadeIn 0.3s ease-in;
+}
+
+/* 背景漸層效果 */
+body {
+    background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+    min-height: 100vh;
+}
+
+/* 自定義卡片陰影效果 */
+.game-card {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>異世界冒險</title>
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- 自定義 CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-900 text-white" x-data="gameData()">
+    <div class="container mx-auto px-4 py-8">
+        <!-- 遊戲標題 -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-purple-400 mb-2">異世界冒險</h1>
+            <p class="text-gray-400" x-text="currentLocation"></p>
+        </header>
+
+        <!-- 主要遊戲區域 -->
+        <main class="max-w-4xl mx-auto">
+            <!-- 角色資訊 -->
+            <div class="bg-gray-800 rounded-lg p-4 mb-6">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div>
+                        <h3 class="text-purple-400">等級</h3>
+                        <p class="text-2xl" x-text="player.level"></p>
+                    </div>
+                    <div>
+                        <h3 class="text-purple-400">HP</h3>
+                        <p class="text-2xl" x-text="player.hp + '/' + player.maxHp"></p>
+                    </div>
+                    <div>
+                        <h3 class="text-purple-400">金幣</h3>
+                        <p class="text-2xl" x-text="player.gold"></p>
+                    </div>
+                    <div>
+                        <h3 class="text-purple-400">經驗值</h3>
+                        <p class="text-2xl" x-text="player.exp + '/' + player.nextLevelExp"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 遊戲內容區域 -->
+            <div class="bg-gray-800 rounded-lg p-6 mb-6">
+                <div class="prose prose-invert max-w-none">
+                    <p class="text-lg mb-4" x-text="currentMessage"></p>
+                    <template x-if="showBattle">
+                        <div class="battle-area">
+                            <h2 class="text-xl text-red-400 mb-3" x-text="'戰鬥中 - ' + currentEnemy.name"></h2>
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <p>敵人 HP: <span x-text="currentEnemy.hp + '/' + currentEnemy.maxHp"></span></p>
+                                </div>
+                                <div>
+                                    <button @click="attack()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">
+                                        攻擊
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <!-- 動作按鈕 -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <template x-for="action in availableActions" :key="action.id">
+                    <button 
+                        @click="executeAction(action.id)"
+                        class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded"
+                        x-text="action.name">
+                    </button>
+                </template>
+            </div>
+        </main>
+    </div>
+    <script src="js/game.js"></script>
+</body>
+</html>
